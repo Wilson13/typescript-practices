@@ -1,0 +1,27 @@
+service: stlog-sftp-rest-invoker
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage, 'dev'}
+  region: ap-southeast-1
+  environment:
+    SLIFT_PROCESS_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
+    SLIFT_PROCESS_FILE_PATH: /sftp/process
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+
+functions:
+  sftpSliftProcess:
+    handler: handler.sftpSliftProcess
+    timeout: 60
+    events:
+      - http:
+          path: sftpSliftProcess
+          method: post
