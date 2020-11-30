@@ -18,7 +18,8 @@ As of now it's deployed manually through `sls deploy`.
 
 ## Functions
 
-- sftpSliftProcess
+- sftpProcessFiles
+- sftpGeneratePod
 
 ## Reference
 

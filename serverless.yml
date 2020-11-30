@@ -4,24 +4,45 @@ service: stlog-sftp-rest-invoker
 # Check out our docs for more details
 frameworkVersion: "2"
 
+custom:
+  serverless-offline:
+    useChildProcesses: true
+  log-level:
+    dev: debug
+    prod: info
+
 provider:
   name: aws
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
   region: ap-southeast-1
   environment:
+    LOG_LEVEL: ${self:custom.log-level.${self:provider.stage}}
+    # SLIFT_PULL_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
     SLIFT_PROCESS_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
+    SLIFT_GENERATE_POD_URL: https://x1xpx0mzck.execute-api.ap-southeast-1.amazonaws.com:443/dev
+    # SLIFT_PUSH_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
+    # SLIFT_PULL_FILE_PATH: /sftp/pull
     SLIFT_PROCESS_FILE_PATH: /sftp/process
+    SLIFT_GENERATE_POD_PATH: /sftp/generate_pod
+    # SLIFT_PUSH_FILE_PATH: /sftp/push
 
 plugins:
-  - serverless-offline
   - serverless-plugin-typescript
+  - serverless-offline
 
 functions:
-  sftpSliftProcess:
-    handler: handler.sftpSliftProcess
+  sftpProcessFiles:
+    handler: handler.sftpProcessFiles
     timeout: 60
     events:
       - http:
-          path: sftpSliftProcess
+          path: sftpProcessFiles
+          method: post
+  sftpGeneratePod:
+    handler: handler.sftpGeneratePod
+    timeout: 60
+    events:
+      - http:
+          path: sftpGeneratePod
           method: post
