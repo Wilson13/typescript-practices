@@ -24,6 +24,8 @@
     "serverless-plugin-typescript": "^1.1.9"
   },
   "scripts": {
+    "deploy": "sls deploy --stage prod",
+    "deploy-dev": "sls deploy --stage dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "offline": "sls offline --stage dev"
   },
