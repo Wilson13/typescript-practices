@@ -20,8 +20,8 @@ provider:
   environment:
     LOG_LEVEL: ${self:custom.log-level.${self:provider.stage}}
     # SLIFT_PULL_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
-    SLIFT_PROCESS_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
-    SLIFT_GENERATE_POD_URL: https://x1xpx0mzck.execute-api.ap-southeast-1.amazonaws.com:443/dev
+    SLIFT_PROCESS_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/${self:provider.stage}
+    SLIFT_GENERATE_POD_URL: https://x1xpx0mzck.execute-api.ap-southeast-1.amazonaws.com:443/${self:provider.stage}
     # SLIFT_PUSH_FILE_URL: https://rb3guxooxl.execute-api.ap-southeast-1.amazonaws.com:443/dev
     # SLIFT_PULL_FILE_PATH: /sftp/pull
     SLIFT_PROCESS_FILE_PATH: /sftp/process
