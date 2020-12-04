@@ -1,7 +1,7 @@
 import { APIGatewayProxyResult, Context } from "aws-lambda";
 import axios, { AxiosResponse } from "axios";
 import { SftpFunctions } from "../utils/constants";
-import { logger } from "../logger";
+import { logger } from "../utils/logger";
 
 export class RestController {
   invokeFunction: SftpFunctions;
@@ -62,7 +62,7 @@ export class RestController {
       };
       return response;
     } catch (err) {
-      console.log(err);
+      logger.error(err);
       let apiResponse;
       if (err.response?.data) {
         apiResponse = err.response?.data;
