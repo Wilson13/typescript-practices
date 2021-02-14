@@ -13,11 +13,10 @@ Typescript code that answers some questions for fun or for work.
 
 # Project Structure (source code level)
 
-📦src
-┣ 📂Task1
-
-┣ 📜detect_object.ts
-
-┣ 📜getTriangleTerms.ts
-
-┗ 📜test.ts
+    src
+    ┣ challenge-1
+    ┃ ┣ README.md
+    ┃ ┗ default-arguments.ts
+    ┣ detect_object.ts
+    ┣ getTriangleTerms.ts
+    ┗ test.ts
