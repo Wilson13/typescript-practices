@@ -8,6 +8,6 @@
     "outDir": "./dist"
   },
   "lib": ["es2015"],
-  "include": ["*.ts"],
+  "include": ["src/**/*"],
   "exclude": ["assets", "node_modules", "bower_components", "jspm_packages"]
 }

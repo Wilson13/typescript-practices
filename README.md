@@ -1,26 +1,20 @@
 ## Name
 
-Stlog SLIFT Restful APIs Invoker.
-
-Repository name: stlog-sftp-rest-invoker.
+Practices and tests.
 
 ## Description
 
-This service is to be used by [AWS Step Function deployed using CDK](https://github.com/fresh-turf/stlog-sftp-workflow-cdk).
+Typescript code that answers some questions for fun or for work.
 
-Reason is somehow, the nodejs/expressjs lambda wrapped with serverless framework can't be invoked as a lambda, they can only be invoked using Restful methods (GET/POST requests).
+### Challenges
 
-Hence, this service is created and it's written in the form of native lambda instead of wrapping around an expressjs application.
+1. Default Arguments
+2. Appointment Scheduling
 
-## CI/CD
+# Project Structure (source code level)
 
-As of now it's deployed manually through `sls deploy`.
-
-## Functions
-
-- sftpProcessFiles
-- sftpGeneratePod
-
-## Reference
-
-- https://github.com/Fresh-Turf/stlog-sftp-workflow-cdk
+📦src
+┣ 📂Task1
+┣ 📜detect_object.ts
+┣ 📜getTriangleTerms.ts
+┗ 📜test.ts
