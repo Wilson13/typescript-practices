@@ -15,6 +15,9 @@ Typescript code that answers some questions for fun or for work.
 
 📦src
 ┣ 📂Task1
+
 ┣ 📜detect_object.ts
+
 ┣ 📜getTriangleTerms.ts
+
 ┗ 📜test.ts
