@@ -53,54 +53,6 @@ function defaultArguments(passedFunc: Function, defaultArgs: Object): Function {
   };
 }
 
-function defaultArgumentsAlt(
-  passedFunc: Function,
-  defaultArgs: Object
-): Function {
-  // Get object keys
-  let argKeys = Object.keys(defaultArgs);
-  // Sort arguments alphabetically
-  argKeys = argKeys.sort();
-
-  // Get the difference in passed function no. of arguments compared to no. of properties
-  // available in the passed object `defaultArgs`.
-  const diff = passedFunc.length - argKeys.length;
-  // Array of arguments to be passed on (order is based on sorted object properties)
-  const passArr = []; //Array(passedFunc.length).fill(0);
-
-  // if (diff > 0) {
-  //   passArr = passArr.fill[0];
-  // }
-  argKeys.forEach((arg) => {
-    // Push value into array by accessing object properties in sorted order
-    passArr.push(defaultArgs[arg]);
-  });
-
-  // Pass argument arrays that will be inserted at the start of the arguments
-  const boundFunction = passedFunc.bind(null, ...passArr);
-
-  const returnFunc = (...args) => {
-    // if (arguments.length == passedFunc.length) {
-    //   return passedFunc(...args);
-    // } else if (passArr.length > arguments.length) {
-    //   passArr.pop();
-    //   return passedFunc.bind(null, ...passArr);
-    // } else {
-    //   //console.log(...passArr);
-    //   return boundFunction(...args); //passedFunc.bind(null, ...passArr);
-    // }
-    if (args.length < passedFunc.length) {
-      // If arguments provided is lesser than the function parameters, push default values.
-      args.push.apply(args, passArr);
-      return passedFunc(...args);
-    } else {
-      return passedFunc(...args);
-    }
-  };
-
-  return returnFunc;
-}
-
 function main() {
   const add2 = defaultArguments(add, { b: 9 });
 
