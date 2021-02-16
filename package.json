@@ -22,8 +22,9 @@
     "prettier-eslint": "^12.0.0"
   },
   "scripts": {
-    "start": "tsc && node ./dist/challenge-1/default-arguments.js",
-    "challenge-1": "tsc && node ./dist/challenge-1/default-arguments.js",
+    "start": "tsc && node ./dist/question-1/default-arguments.js",
+    "question-1": "tsc && node ./dist/question-1/default-arguments.js",
+    "question-2": "tsc && node ./dist/question-2/make-appointments.js",
     "deploy": "sls deploy --stage prod",
     "deploy-dev": "sls deploy --stage dev",
     "test": "echo \"Error: no test specified\" && exit 1",

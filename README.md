@@ -6,7 +6,7 @@ Practices and tests.
 
 Typescript code that answers some questions for fun or for work.
 
-### Challenges
+### Questions
 
 1. Default Arguments
 2. Appointment Scheduling
@@ -14,7 +14,7 @@ Typescript code that answers some questions for fun or for work.
 # Project Structure (source code level)
 
     src
-    ┣ challenge-1
+    ┣ question-1
     ┃ ┣ README.md
     ┃ ┗ default-arguments.ts
     ┣ detect_object.ts

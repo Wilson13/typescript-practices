@@ -25,7 +25,26 @@
       "runtimeArgs": ["run-script", "start"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
+      "type": "pwa-node",
+      "outputCapture": "std"
+    },
+    {
+      "name": "Question 1",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "question-1"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "outputCapture": "std"
+    },
+    {
+      "name": "Question 2",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "question-2"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "outputCapture": "std"
     }
   ]
 }

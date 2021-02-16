@@ -1,5 +1,8 @@
-/* eslint-disable prefer-spread */
 /* eslint-disable @typescript-eslint/ban-types */
+
+// To prevent 'Duplicate function implementation.' error due to functions being in global scope
+export {};
+
 function add(a, b) {
   return a + b;
 }
