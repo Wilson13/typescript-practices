@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
+/**
+ * Yet to find a better (or built-in) way to get the parameter' names from a function.
+ * Current method takes the source code of the function and performs RegExp matching
+ * plus string manipulation to obtain the parameters.
+ *
+ * Another possible approach might be to use "Currying" to transform the
+ * function but current custom solution works so yet to try that one out.
+ */
+
 // To prevent 'Duplicate function implementation.' error due to functions being in global scope
 export {};
 
@@ -7,14 +16,19 @@ function add(a, b) {
   return a + b;
 }
 
+function addThree(a, b, c) {
+  return a + b + c;
+}
+
+function print() {
+  return "Hello World!";
+}
+
 /**
  * Extracts and returns parameters' names from the given function. Returns empty array if none.
  * @param passedFunc
  */
 function getParams(passedFunc: Function) {
-  // Yet to find a better (or built-in) way to get the parameter' names from a function.
-  // Current method takes the source code of the function and performs RegExp matching
-  // plus string manipulation to obtain the parameters.
   const paramRegExp = /\(([a-z]|[0-9]|\,|\s)*\)/i; ///^(function\s)*.*\(([a-z]|[0-9]|\,|\s)*\)/i;
   const matched = passedFunc.toString().match(paramRegExp);
   let paramNames = [];
@@ -39,11 +53,16 @@ function defaultArguments(passedFunc: Function, defaultArgs: Object): Function {
   defaultKeys.forEach((key) => {
     // Get the index to know the position of the parameter in the function declaration
     const index = paramNames.indexOf(key);
-    defaultVals[index] = defaultArgs[key];
+    // Assigning -1 to array won't break the code since it's
+    // just assigning an arbitary property to the array object.
+    // But still prevent it since it's not required.
+    if (index >= 0) {
+      defaultVals[index] = defaultArgs[key];
+    }
   });
 
   // Modify arguments value if required
-  return (...args) => {
+  function modifiedFunction(...args) {
     // During function call, fill up with default values if the
     // corresponding arguments provided is undefined (this is important so that
     // arguments provided will not be override by default values).
@@ -53,7 +72,10 @@ function defaultArguments(passedFunc: Function, defaultArgs: Object): Function {
       }
     });
     return passedFunc(...args);
-  };
+  }
+  // Override the toString method so defaultArguments works when a modified function is given
+  modifiedFunction.toString = () => passedFunc.toString();
+  return modifiedFunction;
 }
 
 function main() {
@@ -63,7 +85,7 @@ function main() {
   console.assert(add2(10, 7) === 17, "Failed at add2(10, 7)");
   console.assert(isNaN(add2()), "Failed at isNaN(add2()");
 
-  const add3 = defaultArguments(add, { b: 3, a: 2 });
+  const add3 = defaultArguments(add2, { b: 3, a: 2 });
 
   console.assert(add3(10) === 13);
   console.assert(add3() === 5);
@@ -74,18 +96,21 @@ function main() {
   console.assert(isNaN(add4(10)));
   console.assert(add4(10, 10) === 20);
 
-  console.log(add2(10));
-  console.log(add2(10, 7));
-  console.log(isNaN(add2()));
+  // console.log(add2(10));
+  // console.log(add2(10, 7));
+  // console.log(isNaN(add2()));
 
-  console.log("\nadd3\n");
-  console.log(add3(10));
-  console.log(add3());
-  console.log(add3(undefined, 10));
+  // console.log("\nadd3\n");
+  // console.log(add3(10));
+  // console.log(add3());
+  // console.log(add3(undefined, 10));
 
-  console.log("\nadd4\n");
-  console.log(add4(10));
-  console.log(add4(10, 10));
+  // console.log("\nadd4\n");
+  // console.log(add4(10));
+  // console.log(add4(10, 10));
+
+  // const printOut = defaultArguments(print, { b: 9 });
+  // console.log(printOut());
 }
 
 main();

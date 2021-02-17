@@ -100,10 +100,6 @@ function makeAppointments(meetingSchedules: string[][][], duration: number) {
         earliestTimeSlot[indices[i]][0] > latestStart
           ? earliestTimeSlot[indices[i]][0]
           : latestStart;
-      // latestEndTime =
-      //   earliestTimeSlot[indices[i]][1] < latestEndTime
-      //     ? earliestTimeSlot[indices[i]][1]
-      //     : latestEndTime;
 
       console.log("earliestFreeTimes: ", earliestTimeSlot[indices[i]]);
       console.log(`latestStart: ${latestStart}`);
