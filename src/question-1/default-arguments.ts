@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-types */
-
 /**
  * Yet to find a better (or built-in) way to get the parameter' names from a function.
  * Current method takes the source code of the function and performs RegExp matching
@@ -34,7 +33,7 @@ function print() {
 function getParams(passedFunc: Function) {
   const paramRegExp = /\(([a-z]|[0-9]|\,|\s)*\)/i; ///^(function\s)*.*\(([a-z]|[0-9]|\,|\s)*\)/i;
   const matched = passedFunc.toString().match(paramRegExp);
-  let paramNames = [];
+  let paramNames: string[] = [];
 
   if (matched != null) {
     // Remove parenthesis surrounding parameters and spaces (if any, in the case of multiple parameters).
@@ -44,13 +43,16 @@ function getParams(passedFunc: Function) {
   return paramNames;
 }
 
-function defaultArguments(passedFunc: Function, defaultArgs: Object): Function {
+function defaultArguments(
+  passedFunc: Function,
+  defaultArgs: Record<string, unknown>
+): Function {
   // Get parameters's names
   const paramNames = getParams(passedFunc);
   // Get object keys
   const defaultKeys = Object.keys(defaultArgs);
   // Stores found parameters' value according to index
-  const defaultVals = [passedFunc.length].fill(null);
+  const defaultVals = Array(passedFunc.length).fill(null);
 
   // Iterate and find if any object keys matched with the parameters' names
   defaultKeys.forEach((key) => {

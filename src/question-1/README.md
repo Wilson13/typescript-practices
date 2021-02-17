@@ -38,3 +38,7 @@ console.assert(add4(10, 10) === 20);
 Run following command at project root directory level
 
     npm run question-1
+
+Or run it from **Repl.it**
+
+https://repl.it/@wilsonxin/challenge-1#index.ts
