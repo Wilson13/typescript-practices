@@ -35,4 +35,6 @@ console.assert(add4(10, 10) === 20);
 
 ## Running
 
+Run following command at project root directory level
+
     npm run question-1

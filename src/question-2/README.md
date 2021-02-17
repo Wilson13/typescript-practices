@@ -51,4 +51,6 @@ let schedules = [
 
 ## Running
 
+Run following command at project root directory level
+
     npm run question-2
