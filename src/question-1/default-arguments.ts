@@ -5,6 +5,9 @@
  * Current method takes the source code of the function and performs RegExp matching
  * plus string manipulation to obtain the parameters.
  *
+ * As of now the regex is meant for a naive matching,
+ * not tested against other possible ways function declaration.
+ *
  * Another possible approach might be to use "Currying" to transform the
  * function but current custom solution works so yet to try that one out.
  */

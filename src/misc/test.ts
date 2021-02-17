@@ -82,7 +82,7 @@ function translatePigLatin(sentence: string): string {
   }
   // Assuming the sentence given is like the example, no punctuations or symbols etc.
   const words = sentence.toLowerCase().split(" ");
-  let translatedString: string[] = [];
+  const translatedString: string[] = [];
   for (const word of words) {
     let translatedWord = "";
     if (word.endsWith("ay")) {

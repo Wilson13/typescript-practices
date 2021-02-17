@@ -14,9 +14,13 @@ Typescript code that answers some questions for fun or for work.
 # Project Structure (source code level)
 
     src
+    ┣ misc
+    ┃ ┣ detect_object.ts
+    ┃ ┣ getTriangleTerms.ts
+    ┃ ┗ test.ts
     ┣ question-1
     ┃ ┣ README.md
     ┃ ┗ default-arguments.ts
-    ┣ detect_object.ts
-    ┣ getTriangleTerms.ts
-    ┗ test.ts
+    ┗ question-2
+    ┃ ┣ README.md
+    ┃ ┗ make-appointments.ts

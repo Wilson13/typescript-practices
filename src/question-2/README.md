@@ -48,3 +48,7 @@ let schedules = [
   ],
 ];
 ```
+
+## Running
+
+    npm run question-2
