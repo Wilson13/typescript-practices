@@ -103,6 +103,8 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
     personFreeTimes[index] = [];
 
     // If this person has no meeting at all, it's a full day of free time.
+    // Also, personMeetings.forEach() will not begin loop since it's an empty array
+    // assuming no null or undefined will be provided.
     if (personMeetings.length == 0) {
       personFreeTimes[index].push([WORK_TIME_START, WORK_TIME_END]);
     }

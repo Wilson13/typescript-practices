@@ -68,9 +68,9 @@ function defaultArguments(
 
   // Modify arguments value if required
   function modifiedFunction(...args) {
-    // During function call, fill up with default values if the
+    // During function call, fills up with default values if the
     // corresponding arguments provided is undefined (this is important so that
-    // arguments provided will not be override by default values).
+    // arguments provided will not be overridden by default values).
     defaultVals.forEach((val, index) => {
       if (val !== null && args[index] == undefined) {
         args[index] = val;
