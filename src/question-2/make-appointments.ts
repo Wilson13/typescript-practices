@@ -1,7 +1,15 @@
 // To prevent 'Duplicate function implementation.' error due to functions being in global scope
 export {};
 
-const DEBUG = false;
+/**
+ * At the highest level, three portions to be considered:
+ *
+ * 1. Start of working hour to first meeting.
+ * 2. In between meetings.
+ * 3. Last meeting towards end of working hour.
+ */
+
+const DEBUG = true;
 const WORK_TIME_START = 900;
 const WORK_TIME_END = 1900;
 const WORK_TIME_END_HR = 19;
@@ -25,6 +33,13 @@ const schedules = [
     ["15:00", "16:30"],
     ["17:45", "19:00"],
   ],
+];
+
+// Duration: 1, free time: '09:00'
+const earlyMeetings = [
+  [["09:01", "11:30"]],
+  [["09:02", "12:00"]],
+  [["09:03", "12:15"]],
 ];
 
 // If one person has no meeting at all,
@@ -118,8 +133,12 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
       // still convert to integer just in case of inconsistencies.
       const startHour = Math.floor(start / 100);
       const startTime = new Date();
-      // Minus 1 minute to meeting start time as it can't be counted as free time (inclusiveness)
-      startTime.setHours(startHour, (start % 100) - 1);
+      // Made a logical error here, since meeting start time is used as the end of the possible free time.
+      // there's no need to subtract one from it. E.g. Meeting time is [ 09:00, 11:30 ], free time can start from
+      // 11:30 (end time is excluded from the meeting). With that, if the first meeting starts from 09:01, and we need only
+      // one minute of meeting time, free time can be [ 09:00, 09:01 ] which makes a lot more sense now.
+      // Wrong code: startTime.setHours(startHour, (start % 100) - 1);
+      startTime.setHours(startHour, start % 100);
       const apptStart = startTime.getHours() * 100 + startTime.getMinutes();
 
       const apptEndTime = new Date();
@@ -143,7 +162,7 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
         endTime.setHours(endHour, end % 100);
 
         // If last meeting ends before 19 and there's enough time for the appointment,
-        // save end of meeting time to end of work as free time.
+        // save end of meeting time (exclusinees) to end of work as free time.
         if (
           endTime.getHours() <= WORK_TIME_END_HR &&
           workTimeEnd.getTime() - endTime.getTime() >= duration
@@ -164,8 +183,8 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
       noFreeTime = true;
     }
   });
-  customLog("Meetings", meetingSchedules);
-  customLog("Free times", personFreeTimes);
+  // customLog("Meetings", meetingSchedules);
+  // customLog("Free times", personFreeTimes);
 
   return noFreeTime ? null : personFreeTimes;
 }
@@ -268,6 +287,7 @@ function makeAppointments(
 
 function main() {
   console.log(makeAppointments(schedules, 60)); // 12:15
+  console.log(makeAppointments(earlyMeetings, 1)); // 09:00
   console.log(makeAppointments(noMeetingSchedule, 59)); // 16:30
   console.log(makeAppointments(noMeetingSchedule, 60)); // null
   console.log(makeAppointments(emptyMeetingSchedule, 60)); // 09:00
