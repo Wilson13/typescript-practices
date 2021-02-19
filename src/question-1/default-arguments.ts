@@ -30,7 +30,7 @@ function print() {
  * Extracts and returns parameters' names from the given function. Returns empty array if none.
  * @param passedFunc
  */
-function getParams(passedFunc: Function) {
+export function getParams(passedFunc: Function): string[] {
   const paramRegExp = /\(([a-z]|[0-9]|\,|\s)*\)/i; ///^(function\s)*.*\(([a-z]|[0-9]|\,|\s)*\)/i;
   const matched = passedFunc.toString().match(paramRegExp);
   let paramNames: string[] = [];
@@ -38,12 +38,22 @@ function getParams(passedFunc: Function) {
   if (matched != null) {
     // Remove parenthesis surrounding parameters and spaces (if any, in the case of multiple parameters).
     // Then splits the string into an array of parameters' names.
-    paramNames = matched[0].replace(/\(|\)|\s/g, "").split(",");
+    paramNames = matched[0]
+      .replace(/\(|\)|\s/g, "")
+      .split(",")
+      .filter((param) => param.length > 0);
+
+    // Note for split():
+    // If separator is omitted or does not occur in str, the returned
+    // array contains one element consisting of the entire string.
+
+    // For zero parameter function, paramNames would be [""] which doesn't affect
+    // the eventual outcome but still return an empty array for consistencies's sake.
   }
   return paramNames;
 }
 
-function defaultArguments(
+export function defaultArguments(
   passedFunc: Function,
   defaultArgs: Record<string, unknown>
 ): Function {

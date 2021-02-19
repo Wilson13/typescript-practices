@@ -9,7 +9,7 @@ export {};
  * 3. Last meeting towards end of working hour.
  */
 
-const DEBUG = true;
+const DEBUG = false;
 const WORK_TIME_START = 900;
 const WORK_TIME_END = 1900;
 const WORK_TIME_END_HR = 19;
@@ -183,8 +183,8 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
       noFreeTime = true;
     }
   });
-  // customLog("Meetings", meetingSchedules);
-  // customLog("Free times", personFreeTimes);
+  customLog("Meetings", meetingSchedules);
+  customLog("Free times", personFreeTimes);
 
   return noFreeTime ? null : personFreeTimes;
 }
