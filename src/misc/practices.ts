@@ -19,13 +19,12 @@ function altConcatList(
     return [];
   }
   // Assuming we need to keep the order, i.e. first element comes from first array passed as argument and so on.
-  let shorterArrLength,
-    longerArr,
-    newList: (string | number)[] = [];
+  const newList: (string | number)[] = [];
   // Could have used an if-else instead of comparing twice,
   // but chose to use Ternary Operator for code tidiness here.
-  shorterArrLength = arr1.length > arr2.length ? arr2.length : arr1.length;
-  longerArr = arr1.length >= arr2.length ? arr1 : arr2;
+  const shorterArrLength =
+    arr1.length > arr2.length ? arr2.length : arr1.length;
+  const longerArr = arr1.length >= arr2.length ? arr1 : arr2;
   let i = 0;
   for (i; i < shorterArrLength; i++) {
     // Wanted to use .pop() but needed a reverse version of it.
@@ -46,12 +45,10 @@ function mergeAndSortList(arr1: number[], arr2: number[]): number[] {
   // As mentioned in the statement, the lists (arrays) provided as arguments are
   // already in sorted order, so there's no need to sort them within this function.
   // Also assuming arrays contain only number.
-  let arr1Length,
-    arr2Length,
-    newList: number[] = [];
+  const newList: number[] = [];
 
-  arr1Length = arr1.length;
-  arr2Length = arr2.length;
+  const arr1Length = arr1.length;
+  const arr2Length = arr2.length;
   // Pivots
   let j = 0,
     k = 0;
