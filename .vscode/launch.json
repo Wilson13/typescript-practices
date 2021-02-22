@@ -37,6 +37,17 @@
       "type": "pwa-node",
       "outputCapture": "std"
     },
+
+    {
+      "name": "Test Question 1",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "test-question-1"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "outputCapture": "std"
+    },
+
     {
       "name": "Question 2",
       "request": "launch",

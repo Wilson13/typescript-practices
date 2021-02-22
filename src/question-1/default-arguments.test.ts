@@ -1,4 +1,4 @@
-import { getParams } from "./default-arguments";
+import { getParamNames } from "./default-arguments";
 export {};
 
 function add(a, b) {
@@ -14,13 +14,13 @@ function print() {
 }
 
 it('should return parameter array ["a", "b"] by passing add(a, b)', () => {
-  expect(getParams(add)).toEqual(["a", "b"]);
+  expect(getParamNames(add)).toEqual(["a", "b"]);
 });
 
 test('should return  parameter array ["a", "b", "c"] by passing addThree(a, b, c) ', () => {
-  expect(getParams(addThree)).toEqual(["a", "b", "c"]);
+  expect(getParamNames(addThree)).toEqual(["a", "b", "c"]);
 });
 
 test("should return parameter array [] by passing print() ", () => {
-  expect(getParams(print)).toEqual([]);
+  expect(getParamNames(print)).toEqual([]);
 });

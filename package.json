@@ -29,7 +29,7 @@
     "start": "tsc && node ./dist/question-1/default-arguments.js",
     "question-1": "tsc && node ./dist/question-1/default-arguments.js",
     "question-2": "tsc && node ./dist/question-2/make-appointments.js",
-    "test": "jest --verbose",
+    "test-question-1": "jest --verbose",
     "coverage": "jest --coverage"
   },
   "author": "",

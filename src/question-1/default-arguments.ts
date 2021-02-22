@@ -30,8 +30,8 @@ function print() {
  * Extracts and returns parameters' names from the given function. Returns empty array if none.
  * @param passedFunc
  */
-export function getParams(passedFunc: Function): string[] {
-  const paramRegExp = /\(([a-z]|[0-9]|\,|\s)*\)/i; ///^(function\s)*.*\(([a-z]|[0-9]|\,|\s)*\)/i;
+export function getParamNames(passedFunc: Function): string[] {
+  const paramRegExp = /\(([a-z]|[0-9]|\,|\s)*\)/i;
   const matched = passedFunc.toString().match(paramRegExp);
   let paramNames: string[] = [];
 
@@ -58,7 +58,7 @@ export function defaultArguments(
   defaultArgs: Record<string, unknown>
 ): Function {
   // Get parameters's names
-  const paramNames = getParams(passedFunc);
+  const paramNames = getParamNames(passedFunc);
   // Get object keys
   const defaultKeys = Object.keys(defaultArgs);
   // Stores found parameters' value according to index
@@ -77,7 +77,7 @@ export function defaultArguments(
   });
 
   // Modify arguments value if required
-  function modifiedFunction(...args) {
+  const modifiedFunction = function (...args) {
     // During function call, fills up with default values if the
     // corresponding arguments provided is undefined (this is important so that
     // arguments provided will not be overridden by default values).
@@ -87,7 +87,7 @@ export function defaultArguments(
       }
     });
     return passedFunc(...args);
-  }
+  };
   // Override the toString method so defaultArguments works when a modified function is given
   modifiedFunction.toString = () => passedFunc.toString();
   return modifiedFunction;
@@ -111,21 +111,21 @@ function main() {
   console.assert(isNaN(add4(10)));
   console.assert(add4(10, 10) === 20);
 
-  // console.log(add2(10));
-  // console.log(add2(10, 7));
-  // console.log(isNaN(add2()));
+  // console.log(add2(10)); // 19
+  // console.log(add2(10, 7)); // 17
+  // console.log(isNaN(add2())); // true
 
   // console.log("\nadd3\n");
-  // console.log(add3(10));
-  // console.log(add3());
-  // console.log(add3(undefined, 10));
+  // console.log(add3(10)); // 13
+  // console.log(add3()); // 5
+  // console.log(add3(undefined, 10)); // 12
 
   // console.log("\nadd4\n");
-  // console.log(add4(10));
-  // console.log(add4(10, 10));
+  // console.log(add4(10)); // NaN
+  // console.log(add4(10, 10)); // 20
 
   // const printOut = defaultArguments(print, { b: 9 });
-  // console.log(printOut());
+  // console.log(printOut()); // "Hello World!""
 }
 
 main();
