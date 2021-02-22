@@ -10,6 +10,7 @@ export {};
  */
 
 const DEBUG = false;
+const CURRENT_TIME = new Date(); // Set up this constant just in case of inconsistencies
 const WORK_TIME_START = 900;
 const WORK_TIME_END = 1900;
 const WORK_TIME_END_HOUR = 19;
@@ -116,16 +117,16 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
     // If this person has no meeting at all, it's a full day of free time.
     // Also, personMeetings.forEach() will not begin loop since it's an empty array
     // assuming no null or undefined will be provided.
-    if (personMeetings.length == 0) {
+    if (personMeetings.length === 0) {
       personFreeTimes[personIndex].push([WORK_TIME_START, WORK_TIME_END]);
     }
 
     // Iterate through every meeting this person has
     personMeetings.forEach((meeting, meetingIndex) => {
-      const meetingStartTime = new Date();
-      const prevEndTime = new Date();
-      const apptEndTime = new Date(); // Potential appointment within free time
-      const workEndTime = new Date();
+      const meetingStartTime = new Date(CURRENT_TIME);
+      const prevEndTime = new Date(CURRENT_TIME);
+      const apptEndTime = new Date(CURRENT_TIME); // Potential appointment within free time
+      const workEndTime = new Date(CURRENT_TIME);
       const meetingStart = Number(meeting[0].replace(":", ""));
       const meetingEnd = Number(meeting[1].replace(":", ""));
 
@@ -154,8 +155,8 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
       }
       // If this is the last meeting the person has, check if there's
       // any free time left from end of meeting to end of work hour.
-      if (meetingIndex == personMeetings.length - 1) {
-        const meetingEndTime = new Date();
+      if (meetingIndex === personMeetings.length - 1) {
+        const meetingEndTime = new Date(CURRENT_TIME);
         meetingEndTime.setHours(Math.floor(meetingEnd / 100), meetingEnd % 100, 0, 0);
 
         // If last meeting ends before end of working hour (19:00, will be negative if meetingEndTime is later than that)
@@ -172,7 +173,7 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
       prevEnd = meetingEnd;
     });
 
-    if (personFreeTimes[personIndex].length == 0) {
+    if (personFreeTimes[personIndex].length === 0) {
       // Set haNoFreeTime to true if there's one person that don't have any free time at all
       hasNoFreeTime = true;
     }
@@ -208,8 +209,8 @@ function makeAppointment(meetingSchedules: string[][][], duration: number): stri
   // Keep looping until output result is out
   while (output === undefined) {
     let hasFoundFreeTime = true;
-    const latestStartTime = new Date();
-    const apptEndTime = new Date();
+    const latestStartTime = new Date(CURRENT_TIME);
+    const apptEndTime = new Date(CURRENT_TIME);
     // First loop is meant for finding the latest start time among
     // every person's current iteration of earliest free time slots.
     freetimes.forEach((personFreeTime, personIndex) => {

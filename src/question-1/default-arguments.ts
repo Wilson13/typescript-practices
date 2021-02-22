@@ -35,7 +35,7 @@ export function getParamNames(passedFunc: Function): string[] {
   const matched = passedFunc.toString().match(paramRegExp);
   let paramNames: string[] = [];
 
-  if (matched != null) {
+  if (matched !== null) {
     // Remove parenthesis surrounding parameters and spaces (if any, in the case of multiple parameters).
     // Then splits the string into an array of parameters' names.
     paramNames = matched[0]
@@ -82,7 +82,7 @@ export function defaultArguments(
     // corresponding arguments provided is undefined (this is important so that
     // arguments provided will not be overridden by default values).
     defaultVals.forEach((val, index) => {
-      if (val !== null && args[index] == undefined) {
+      if (val !== null && args[index] === undefined) {
         args[index] = val;
       }
     });
