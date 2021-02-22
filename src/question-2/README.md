@@ -1,6 +1,6 @@
 ## Challenge Name
 
-Making Appointments
+Making Appointment
 
 ## Description
 

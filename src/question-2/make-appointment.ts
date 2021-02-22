@@ -189,7 +189,7 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
  * @param duration
  */
 
-function makeAppointments(meetingSchedules: string[][][], duration: number): string {
+function makeAppointment(meetingSchedules: string[][][], duration: number): string {
   const freetimes = findFreeTimes(meetingSchedules, duration);
 
   customLog("Meetings", meetingSchedules);
@@ -274,15 +274,15 @@ function makeAppointments(meetingSchedules: string[][][], duration: number): str
 }
 
 function main() {
-  console.log(makeAppointments(schedules, 60)); // 12:15
-  console.log(makeAppointments(earlyMeetings, 1)); // 09:00
-  console.log(makeAppointments(noMeetingSchedule, 60)); // 16:30
-  console.log(makeAppointments(noMeetingSchedule, 61)); // null
-  console.log(makeAppointments(emptyMeetingSchedule, 60)); // 09:00
-  console.log(makeAppointments(noFreeTimeSchedule, 60)); // null
-  console.log(makeAppointments(noFreeTimeSchedule, 29)); // 12:00
-  console.log(makeAppointments(nearEndOfWorkSchedule, 30)); // 18:30
-  console.log(makeAppointments(nearEndOfWorkSchedule, 31)); // null
+  console.log(makeAppointment(schedules, 60)); // 12:15
+  console.log(makeAppointment(earlyMeetings, 1)); // 09:00
+  console.log(makeAppointment(noMeetingSchedule, 60)); // 16:30
+  console.log(makeAppointment(noMeetingSchedule, 61)); // null
+  console.log(makeAppointment(emptyMeetingSchedule, 60)); // 09:00
+  console.log(makeAppointment(noFreeTimeSchedule, 60)); // null
+  console.log(makeAppointment(noFreeTimeSchedule, 29)); // 12:00
+  console.log(makeAppointment(nearEndOfWorkSchedule, 30)); // 18:30
+  console.log(makeAppointment(nearEndOfWorkSchedule, 31)); // null
 }
 
 main();
