@@ -97,6 +97,7 @@ function customLog(text, object = null) {
  * @param meetingSchedules
  * @param duration
  */
+// TODO: Provide constants as arguments to make pure function
 function findFreeTimes(meetingSchedules: string[][][], duration: number) {
   // Some input validation just in case it's needed
   if (duration > TOTAL_WORK_HOUR) {
@@ -189,7 +190,7 @@ function findFreeTimes(meetingSchedules: string[][][], duration: number) {
  * @param meetingSchedules
  * @param duration
  */
-
+// TODO: Provide constants as arguments to make pure function
 function makeAppointment(meetingSchedules: string[][][], duration: number): string {
   const freetimes = findFreeTimes(meetingSchedules, duration);
 
